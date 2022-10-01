@@ -1,0 +1,16 @@
+{
+  "name": "cost-calculator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Andrew Smelov",
+  "license": "MIT",
+  "scripts": {
+    "start-server": "yarn --cwd server start:dev",
+    "start-client": "yarn --cwd client start",
+    "start": "concurrently 'yarn:start-server' 'yarn:start-client'"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "cwd": "^0.10.0"
+  }
+}
