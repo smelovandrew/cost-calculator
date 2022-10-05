@@ -1,16 +1,21 @@
 import React from "react";
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { Dashboard } from "./dashboard/Dashboard";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Dashboard />,
-  },
-]);
-function App() {
-  return <RouterProvider router={router} />;
-}
+const router: Readonly<ReturnType<typeof createBrowserRouter>> =
+  createBrowserRouter([
+    {
+      path: "/",
+      element: <Navigate to="/dashboard" replace={true} />,
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
+    },
+  ]);
 
-export default App;
+export default () => <RouterProvider router={router} />;
