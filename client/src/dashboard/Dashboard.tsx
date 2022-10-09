@@ -12,6 +12,7 @@ import {
 import { PieChartOutlined } from "@ant-design/icons";
 import { css } from "@emotion/css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { OperationsTable } from "./Operations/OperationsTable";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -58,9 +59,15 @@ export const Dashboard: FC = () => {
               ghost={false}
               onBack={() => navigate(-1)}
             />
-            <Card>
+            <Card title="Operation list">
               <Row justify="center">
-                <Col>Hello world!</Col>
+                <Col
+                  className={css`
+                    width: 1000px;
+                  `}
+                >
+                  <OperationsTable />
+                </Col>
               </Row>
             </Card>
           </Space>
