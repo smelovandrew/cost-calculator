@@ -5,6 +5,7 @@ import {
   ResponseStatuses,
   SuccessResponse,
 } from "../../api";
+import { notification } from "antd";
 
 export interface Operation {
   id: number;
@@ -62,12 +63,9 @@ const fakeOperations: readonly Operation[] = [
 export const useOperations = (): {
   operations: readonly Operation[];
   loading: boolean;
-  error?: string;
 } => {
-  const [operations, setOperations] =
-    useState<readonly Operation[]>(fakeOperations);
+  const [operations, setOperations] = useState<readonly Operation[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | undefined>();
 
   useEffect(() => {
     let isCancelled = false;
@@ -88,9 +86,13 @@ export const useOperations = (): {
 
           setLoading(false);
         }
-      } catch (error) {
+      } catch (e) {
+        const error = e as Error;
         if (!isCancelled) {
-          setError((error as Error).message);
+          notification.error({
+            description: error.message,
+            message: "Failed to load operations",
+          });
           setLoading(false);
         }
       }
@@ -103,5 +105,5 @@ export const useOperations = (): {
     };
   }, []);
 
-  return { operations, loading, error };
+  return { operations, loading };
 };

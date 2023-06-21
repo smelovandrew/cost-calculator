@@ -66,7 +66,14 @@ const columns: ColumnsType<Operation> = [
 ];
 
 export const OperationsTable: FC = () => {
-  const { operations } = useOperations();
+  const { operations, loading } = useOperations();
 
-  return <Table columns={columns} dataSource={operations} rowKey="id" />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={operations}
+      loading={loading}
+      rowKey="id"
+    />
+  );
 };
